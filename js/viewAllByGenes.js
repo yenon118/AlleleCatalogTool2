@@ -256,38 +256,34 @@ function queryMetadataByImprovementStatusAndGenotypeCombination(organism, datase
 function queryAllCountsByGene(organism, dataset, gene, improvement_status_array_string){
     let improvement_status_array = improvement_status_array_string.split(";");
 
-    if (dataset && gene && improvement_status_array_string) {
-        if(improvement_status_array.length > 0) {
-            $.ajax({
-                url: 'queryAllCountsByGene/'+organism,
-                type: 'GET',
-                contentType: 'application/json',
-                data: {
-                    Organism: organism,
-                    Dataset: dataset,
-                    Gene: gene,
-                    Improvement_Status_Array: improvement_status_array
-                },
-                success: function (response) {
-                    res = JSON.parse(response);
+    if (dataset && gene) {
+        $.ajax({
+            url: 'queryAllCountsByGene/'+organism,
+            type: 'GET',
+            contentType: 'application/json',
+            data: {
+                Organism: organism,
+                Dataset: dataset,
+                Gene: gene,
+                Improvement_Status_Array: improvement_status_array
+            },
+            success: function (response) {
+                res = JSON.parse(response);
 
-                    if (res.length > 0) {
-                        let csvString = convertJsonToPositionSeparatedCsv(res);
-                        createAndDownloadCsvFile(csvString, String(organism) + "_" + String(dataset) + "_" + gene + "_Counts");
+                if (res.length > 0) {
+                    let csvString = convertJsonToPositionSeparatedCsv(res);
+                    createAndDownloadCsvFile(csvString, String(organism) + "_" + String(dataset) + "_" + gene + "_Counts");
 
-                    } else {
-                        alert("Downloading counts by " + gene + " gene of " + dataset + " is not available!!!");
-                    }
-
-                },
-                error: function (xhr, status, error) {
-                    console.log('Error with code ' + xhr.status + ': ' + xhr.statusText);
+                } else {
                     alert("Downloading counts by " + gene + " gene of " + dataset + " is not available!!!");
                 }
-            });
-        } else {
-            alert("Downloading counts by " + gene + " gene of " + dataset + " is not available!!!");
-        }
+
+            },
+            error: function (xhr, status, error) {
+                console.log('Error with code ' + xhr.status + ': ' + xhr.statusText);
+                alert("Downloading counts by " + gene + " gene of " + dataset + " is not available!!!");
+            }
+        });
     } else {
         alert("Downloading counts by " + gene + " gene of " + dataset + " is not available!!!");
     }
@@ -297,38 +293,34 @@ function queryAllCountsByGene(organism, dataset, gene, improvement_status_array_
 function queryAllByGene(organism, dataset, gene, improvement_status_array_string){
     let improvement_status_array = improvement_status_array_string.split(";");
 
-    if (dataset && gene && improvement_status_array_string) {
-        if(improvement_status_array.length > 0) {
-            $.ajax({
-                url: 'queryAllByGene/'+organism,
-                type: 'GET',
-                contentType: 'application/json',
-                data: {
-                    Organism: organism,
-                    Dataset: dataset,
-                    Gene: gene,
-                    Improvement_Status_Array: improvement_status_array
-                },
-                success: function (response) {
-                    res = JSON.parse(response);
+    if (dataset && gene) {
+        $.ajax({
+            url: 'queryAllByGene/'+organism,
+            type: 'GET',
+            contentType: 'application/json',
+            data: {
+                Organism: organism,
+                Dataset: dataset,
+                Gene: gene,
+                Improvement_Status_Array: improvement_status_array
+            },
+            success: function (response) {
+                res = JSON.parse(response);
 
-                    if (res.length > 0) {
-                        let csvString = convertJsonToCsv(res);
-                        createAndDownloadCsvFile(csvString, String(organism) + "_" + String(dataset) + "_" + gene + "_Data");
+                if (res.length > 0) {
+                    let csvString = convertJsonToCsv(res);
+                    createAndDownloadCsvFile(csvString, String(organism) + "_" + String(dataset) + "_" + gene + "_Data");
 
-                    } else {
-                        alert("Downloading data by " + gene + " gene of " + dataset + " is not available!!!");
-                    }
-
-                },
-                error: function (xhr, status, error) {
-                    console.log('Error with code ' + xhr.status + ': ' + xhr.statusText);
+                } else {
                     alert("Downloading data by " + gene + " gene of " + dataset + " is not available!!!");
                 }
-            });
-        } else {
-            alert("Downloading data by " + gene + " gene of " + dataset + " is not available!!!");
-        }
+
+            },
+            error: function (xhr, status, error) {
+                console.log('Error with code ' + xhr.status + ': ' + xhr.statusText);
+                alert("Downloading data by " + gene + " gene of " + dataset + " is not available!!!");
+            }
+        });
     } else {
         alert("Downloading data by " + gene + " gene of " + dataset + " is not available!!!");
     }
@@ -374,8 +366,8 @@ function queryAllCountsByMultipleGenes(organism, dataset, gene_array_string, imp
     let gene_array = gene_array_string.split(";");
     let improvement_status_array = improvement_status_array_string.split(";");
 
-    if (dataset && gene_array_string && improvement_status_array_string) {
-        if(gene_array.length > 0 && improvement_status_array.length > 0) {
+    if (dataset && gene_array_string) {
+        if(gene_array.length > 0) {
             $.ajax({
                 url: 'queryAllCountsByMultipleGenes/'+organism,
                 type: 'GET',
@@ -417,8 +409,8 @@ function queryAllByMultipleGenes(organism, dataset, gene_array_string, improveme
     let gene_array = gene_array_string.split(";");
     let improvement_status_array = improvement_status_array_string.split(";");
 
-    if (dataset && gene_array_string && improvement_status_array_string) {
-        if(gene_array.length > 0 && improvement_status_array.length > 0) {
+    if (dataset && gene_array_string) {
+        if(gene_array.length > 0) {
             $.ajax({
                 url: 'queryAllByMultipleGenes/'+organism,
                 type: 'GET',
