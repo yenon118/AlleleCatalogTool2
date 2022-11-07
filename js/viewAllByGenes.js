@@ -77,8 +77,8 @@ function checkHighlight(event) {
     var id = event.id;
     var id = id.replace(/(_l)|(_r)/, '');
 
-    let input_ids = document.querySelectorAll('input[id^="'+id+'"]');
-    let td_ids = document.querySelectorAll('td[id^="'+id+'"]');
+    let input_ids = document.querySelectorAll('input[id^="'+id+'_"]');
+    let td_ids = document.querySelectorAll('td[id^="'+id+'_"]');
 
     if (document.getElementById(event.id).checked) {
         for (let i = 0; i < input_ids.length; i++) {
